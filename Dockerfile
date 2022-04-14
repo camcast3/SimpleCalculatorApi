@@ -8,14 +8,25 @@ RUN apk add --no-cache \
 
 WORKDIR /app
 
-COPY ./go-server/go.mod ./
-COPY ./go-server/go.sum ./
+COPY ./go-server/*.mod ./
 
-RUN go mod download
+COPY ./go-server/*.sum ./
 
 COPY ./go-server/*.go ./
 
-RUN go install github.com/camcast3/SimpleCalculatorApi/arithmetic@latest
+RUN mkdir /app/arithmetic
+
+WORKDIR /app/arithmetic
+
+COPY ./go-server/arithmetic/*.go ./
+
+RUN go build .
+
+WORKDIR /app
+
+RUN go mod download
+
+RUN go mod tidy
 
 RUN go build -o /go-server
 

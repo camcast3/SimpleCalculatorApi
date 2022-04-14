@@ -4,12 +4,11 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/camcast3/SimpleCalculatorApi/arithmetic"
+	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/camcast3/SimpleCalculatorApi/arithmetic"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestPostRoute(t *testing.T) {
